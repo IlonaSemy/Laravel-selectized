@@ -43,7 +43,7 @@
                                 
                     <form class="navbar-form" role="search">
                       <div class="form-group" style="width: 240px;">
-                        <select id="searchbox" name="q" placeholder="Search products or categories..." class="form-control" ></select>
+                        <select id="searchbox" name="q" placeholder="Search products or categories..." class="form-control" style="min-width: 200px;"></select>
                       </div>
                     </form>
                   </li>
