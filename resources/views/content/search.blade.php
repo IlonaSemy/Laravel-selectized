@@ -18,7 +18,7 @@
     @if($products)   
     
    @foreach($products as $product) 
-    <div>  
+    <div class="col-md-6 col-sm-6 text-center">    
         
         <h3>{{ $product['title']}}</h3> 
         <p><a href="{{ url('shop/' . $category['url'] . '/' . $product['url'])}}" class="grayscaleimg"><img width="200" src ="{{ asset('images/'. $product['image'])}}" ></a></p>  
