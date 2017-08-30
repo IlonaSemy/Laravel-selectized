@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Categorie;
 class ApiSearchController extends MainController {
     
     public function appendValue($data, $type, $element)
@@ -31,23 +32,25 @@ class ApiSearchController extends MainController {
 	$query = e($request->get('q',''));
 
 	
-	if(!$query && $query == '') return Response::json(array(), 400);
+	if(!$query && $query == '') return response()->json(array(), 400);
 
 	$products = Product::where('article','like','%'.$query.'%')
 	->where('title','like','%'.$query.'%')
 	->orderBy('title','asc')
 	->take(5)
-	->get(array('title','article','image'))->toArray();
+	->get(array('title','article','categorie_id','image'))->toArray();
+
+
 
 	$categories = Categorie::where('title','like','%'.$query.'%')
 	->has('products')
 	->take(5)
-	->get(array('title', 'article'))
+	->get(array('title', 'article','image'))
 	->toArray();
 
         $categories = $this->appendValue($categories, url('img/icons/category-icon.png'),'icon');
-        $products 	= $this->appendURL($products, 'products');
-		$categories  = $this->appendURL($categories, 'categories');
+        $products 	= $this->appendURL($products, "shop/search");
+		$categories  = $this->appendURL($categories, 'shop');
 		// Add type of data to each item of each set of results
 		$products = $this->appendValue($products, 'product', 'class');
 		$categories = $this->appendValue($categories, 'categorie', 'class');
@@ -56,7 +59,7 @@ class ApiSearchController extends MainController {
 	// Merge all data into one array
 	$data = array_merge($products, $categories);
 
-	return Response::json(array(
+	return response()->json(array(
 		'data'=>$data
 	));
 }
