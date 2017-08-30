@@ -1,4 +1,7 @@
 
+.selectize-input{
+    min-width: 200px;
+}
 #footer{font-size: 40px;} 
 
 #total-cart{ 
