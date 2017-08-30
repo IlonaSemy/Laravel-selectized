@@ -1,5 +1,4 @@
-
-/* global $this */ 
+//* global $thiss */ 
 
 $('#sm-box').delay(3000).slideUp();
 
@@ -66,7 +65,7 @@ $(document).ready(function(){
         create: false,
         render: {
             option: function(item, escape) {
-                return '<div><img src="'+ item.image +'">' +escape(item.article)+'</div>';
+                return '<div><img src='+BASE_URL+'/images/'+ item.image +'>' +escape(item.title)+'</div>';
             }
         },
         optgroups: [
@@ -77,7 +76,7 @@ $(document).ready(function(){
         load: function(query, callback) {
             if (!query.length) return callback();
             $.ajax({
-                url: root+'/api/search',
+                url: BASE_URL+'/api/search',
                 type: 'GET',
                 dataType: 'json',
                 data: {
@@ -96,6 +95,5 @@ $(document).ready(function(){
         }
     });
 });
-
 
 
